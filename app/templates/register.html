@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name() }}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>
+            {{ form.city.label }}<br> 
+            {{ form.city() }}\
+        </p>
+        {% if choice=='doctor' %}
+        <p>
+            {{ form.qual.label }}<br> 
+            {{ form.qual() }}\
+        </p>
+        <p>
+            {{ form.fees.label }}<br> 
+            {{ form.fees() }}
+        </p>
+        {% endif %}
+        <p>{{ form.submit() }}</p>
+    </form>
+    
+</body>
+</html>
