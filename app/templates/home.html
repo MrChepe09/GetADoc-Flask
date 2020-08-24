@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>GetADoc - Book a Doctor</title>
 </head>
 <body>
-    <h1>Hello!! Welcome to GetADoc!!!</h1>
+    <h1 class="m-5">Hello!! Welcome to GetADoc!!!</h1>
+    <h2 class="text-center text-primary">{{ current_user.full_name }}</h2>
+    <div class="mt-5 d-flex flex-column offset-4 col-4 p-5 center">
+        {% if current_user.is_anonymous %}
+        <a class="btn btn-success m-2" href={{ url_for('login') }}>Login</a><br>
+        {% else %}
+        <a class="btn btn-success m-2" href={{ url_for('logout') }}>Logout</a><br>
+        {% endif %}
+        <a class="btn btn-warning m-2" href={{ url_for('about') }}>About</a><br>
+        <a class="btn btn-dark m-2" href={{ url_for('register', choice='doctor') }}>Register as a Doctor</a><br>
+        <a class="btn btn-danger m-2" href={{ url_for('register', choice='patient') }}>Register as a Patient</a><br>
+    </div>
 </body>
 </html>

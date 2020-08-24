@@ -12,27 +12,59 @@
         <p>
             {{ form.name.label }}<br>
             {{ form.name() }}
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.email.label }}<br>
             {{ form.email(size=32) }}
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.city.label }}<br> 
-            {{ form.city() }}\
+            {{ form.city() }}
+            {% for error in form.city.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         {% if choice=='doctor' %}
         <p>
+            {{ form.phone.label }}<br> 
+            {{ form.phone() }}
+            {% for error in form.phone.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.address.label }}<br> 
+            {{ form.address() }}
+            {% for error in form.address.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
             {{ form.qual.label }}<br> 
-            {{ form.qual() }}\
+            {{ form.qual() }}
+            {% for error in form.qual.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.fees.label }}<br> 
             {{ form.fees() }}
+            {% for error in form.fees.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         {% endif %}
         <p>{{ form.submit() }}</p>
