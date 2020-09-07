@@ -1,0 +1,24 @@
+{% include 'base.html' %}
+{% block main %}
+    <h1 class="text-warning">Pending Appointments</h1>
+    <ul class="list-group">
+    {% for date in pending %}
+        <li class="list-group-item bg-dark"><h1>Requested Date is {{ moment(timestamp=date.requested_date, local=True).format('LL') }}</h1></li>
+    {% endfor %}
+    </ul>
+
+    <h1 class="text-primary">Confirmed Appointments</h1>
+    <ul class="list-group">
+    {% for date in confirm %}
+        <li class="list-group-item bg-dark"><h1>Appointment Date is {{ moment(timestamp=date.appointment_date, local=True).format('LL') }} AT {{ moment(timestamp=date.appointment_time, local=True).format('LT') }}</h1></li>
+    {% endfor %}
+    </ul>
+    
+    <h1 class="text-success">Rejected Appointments</h1>
+    <ul class="list-group">
+    {% for date in reject %}
+        <li class="list-group-item bg-dark"><h1>Requested Date was {{ moment(timestamp=date.requested_date, local=True).format('LL') }}</h1>
+        <h1>Message: {{date.reject_msg}}</h1></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

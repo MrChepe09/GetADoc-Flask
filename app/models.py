@@ -1,6 +1,7 @@
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime 
 
 @login.user_loader
 def load_user(id):
@@ -15,6 +16,7 @@ class Patient(UserMixin, db.Model):
     city = db.Column(db.String(20))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(120))
+    appointments = db.relationship('Appointment', backref='patient', lazy='dynamic')
 
     def __repr__(self):
         return '<Patient {}>'.format(self.full_name)
@@ -36,6 +38,7 @@ class Doctor(UserMixin, db.Model):
     address = db.Column(db.String(120))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(120))
+    appointments = db.relationship('Appointment', backref='doctor', lazy='dynamic')
 
     def __repr__(self):
         return '<Doctor {}>'.format(self.full_name)
@@ -45,3 +48,14 @@ class Doctor(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
+class Appointment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    requested_date = db.Column(db.Date)
+    appointment_date = db.Column(db.Date)
+    appointment_time = db.Column(db.Time)
+    doctor_id = db.Column(db.String(120), db.ForeignKey('doctor.id'))
+    patient_id = db.Column(db.String(120), db.ForeignKey('patient.id'))
+    reject_msg = db.Column(db.String(120))
+    status = db.Column(db.Integer)

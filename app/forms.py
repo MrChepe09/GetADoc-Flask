@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, IntegerField
-from wtforms.validators import ValidationError, DataRequired, Email, Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, IntegerField, TextField
+from wtforms.fields.html5 import DateField, TimeField, DateTimeField
+from wtforms.validators import ValidationError, DataRequired, Email, Length, Optional
 from app.models import Doctor, Patient
 
 class LoginForm(FlaskForm):
@@ -38,3 +39,19 @@ class PatientRegister(FlaskForm):
         if patient is not None:
             raise ValidationError('Email is already Registered!!')
 
+class AppointmentForm(FlaskForm):
+    doctor_id = StringField('Doctor ID', validators=[Optional()])
+    patient_id = StringField('Patient ID', validators=[Optional()])
+    patient_name = StringField('Patient Name', validators=[DataRequired()])
+    mobile = IntegerField('Mobile Number', validators=[DataRequired()])
+    date = DateField('Enter Appointment Date', validators=[DataRequired()])
+    submit = SubmitField('Submit Request Form', validators=[DataRequired()])
+
+class confirmAppointment(FlaskForm):
+    appoint_date = DateField("Appointment Date", validators=[DataRequired()])
+    appoint_time = TimeField("Appointment Time", validators=[DataRequired()])
+    submit = SubmitField("Confirm Appointment")
+
+class rejectAppointment(FlaskForm):
+    rejectMessage = TextField('Reject Message', validators=[DataRequired()])
+    submit = SubmitField('Reject Appointment')

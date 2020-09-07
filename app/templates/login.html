@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
+{% include 'base.html' %}
+{% block main %}
     <h1>Log In</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
-        <p>
+        <p class="text-light">
             {{ form.choice.label }}<br>
-            {{ form.choice() }}
+            {{ form.choice(class="form-control") }}
         </p>
-        <p>
+        <p class="text-light">
             {{ form.email.label }}<br>
-            {{ form.email(size=32) }}
+            {{ form.email(class="form-control") }}
             {% for error in form.email.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p class="text-light">
             {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
+            {{ form.password(class="form-control") }}
             {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.remember_me.label }} {{ form.remember_me() }}</p>
-        <p>{{ form.submit() }}</p>
+        <p class="text-light">{{ form.remember_me.label }} {{ form.remember_me() }}</p>
+        <p>{{ form.submit(class="form-control btn-primary") }}</p>
     </form>
-    
-</body>
-</html>
+{% endblock %}

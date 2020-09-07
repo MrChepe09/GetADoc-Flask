@@ -1,0 +1,10 @@
+{% include 'base.html' %}
+{% block main %}
+    <div class="container">
+        <h1 class="mb-3 text-primary">Doctor's in your City</h1>
+        {% for doc in doclist %}
+            <h1>{{ doc.full_name }}</h1>
+            <a class="btn btn-success" href={{ url_for('book', Did=doc.id) }}>Book Appointment</a>
+        {% endfor %}
+    </div>
+{% endblock %}
